@@ -62,10 +62,16 @@ def initialize_terminal():
     # Clear terminal buffer when explicitly resetting
     terminal_buffer.clear()
 
-    # Determine which shell to use - fallback to sh if bash not available
-    shell_path = "/bin/bash"
-    if not os.path.exists(shell_path):
+    # Try to use zsh, then bash, fallback to sh
+    if os.path.exists("/bin/zsh"):
+        shell_path = "/bin/zsh"
+        startup_command = "source ~/.zshrc 2>/dev/null || true"
+    elif os.path.exists("/bin/bash"):
+        shell_path = "/bin/bash"
+        startup_command = "source ~/.bashrc 2>/dev/null || true"
+    else:
         shell_path = "/bin/sh"
+        startup_command = ""
     
     # Create a new pexpect process with proper terminal settings
     with terminal_lock:
@@ -76,6 +82,12 @@ def initialize_terminal():
             dimensions=(24, 80),  # Default size, will be updated soon
             env=dict(os.environ, TERM='xterm-256color')  # Set proper terminal type
         )
+        
+        # Source the appropriate rc file if it exists
+        if startup_command:
+            terminal.sendline(startup_command)
+            # Wait a bit for the rc file to be loaded
+            time.sleep(0.5)
     
     # Start reading from the terminal
     start_reading()
