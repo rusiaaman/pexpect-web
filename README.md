@@ -4,7 +4,7 @@ A real-time, interactive web-based terminal interface powered by Python's pexpec
 
 ## Demo
 
-![Pexpect Web Terminal Demo](pexpect-web-demo.gif)
+![Pexpect Web Terminal Demo](pexpect-web-demo-hq.gif)
 
 ## Overview
 
