@@ -2,6 +2,10 @@
 
 A real-time, interactive web-based terminal interface powered by Python's pexpect library, Flask, WebSockets, and xterm.js.
 
+## Demo
+
+![Pexpect Web Terminal Demo](pexpect-web-demo.mp4)
+
 ## Overview
 
 This application creates a fully interactive web terminal that communicates with a bash/sh shell running on the server. The terminal provides a seamless experience that mimics a native terminal application, with real-time streaming of output via WebSockets and direct keyboard input.
